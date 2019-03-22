@@ -7,9 +7,19 @@ function love.load()
 
   music:setLooping(true)
   music:play()
+
+  -- TEXT
+  text = "Hello " .. "Cruel World"
+end
+
+function love.update(dt)
+  if love.keyboard.isDown("down") then
+    text = "Alas, the down key hath been pressed."
+  end
 end
 
 function love.draw()
   love.graphics.print("Whaley", 300, 180)
+  love.graphics.print(text, 300, 100)
   love.graphics.draw(whale, 300, 200)
 end
