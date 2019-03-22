@@ -1,7 +1,12 @@
 function love.load()
+  -- GRAPHICS
   whale = love.graphics.newImage("whale.png")
-  sound = love.audio.newSource("music.ogg", "stream")
-  love.audio.play(sound)
+
+  -- AUDIO
+  music = love.audio.newSource("music.ogg", "stream")
+
+  music:setLooping(true)
+  music:play()
 end
 
 function love.draw()
