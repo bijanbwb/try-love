@@ -23,3 +23,15 @@ function love.draw()
   love.graphics.print(text, 300, 100)
   love.graphics.draw(whale, 300, 200)
 end
+
+function love.focus(f)
+  if not f then
+    print("Game paused.")
+  else
+    print("Resume game.")
+  end
+end
+
+function love.quit()
+  print("Thanks for playing! I've had a whale of a time.")
+end
