@@ -1,37 +1,29 @@
+-- CONSTANTS
+
+WINDOW_WIDTH = 1280
+WINDOW_HEIGHT = 720
+
+-- LOAD
+
 function love.load()
-  -- GRAPHICS
-  whale = love.graphics.newImage("gfx/whale.png")
+  settings = {
+    fullscreen = false,
+    resizable = false,
+    vsync = true
+  }
 
-  -- AUDIO
-  music = love.audio.newSource("sound/music.ogg", "stream")
-
-  music:setLooping(true)
-  music:play()
-
-  -- TEXT
-  text = "Hello " .. "Cruel World"
+  love.window.setMode(WINDOW_WIDTH, WINDOW_HEIGHT, {})
 end
 
-function love.update(dt)
-  if love.keyboard.isDown("down") then
-    text = "Alas, the down key hath been pressed."
-  end
-end
+-- DRAW
 
 function love.draw()
-  love.graphics.print("Whaley", 300, 180)
-  love.graphics.print(text, 300, 100)
-  love.graphics.draw(whale, 300, 200)
-end
+  x_offset = 40
+  y_offset = 6
 
-function love.focus(f)
-  if not f then
-    print("Game paused.")
-  else
-    print("Resume game.")
-  end
-end
+  horizontal_center = WINDOW_WIDTH / 2 - x_offset
+  vertical_center = WINDOW_HEIGHT / 2 - y_offset
 
-function love.quit()
-  print("Thanks for playing! I've had a whale of a time.")
+  -- Draw text in the center of the window
+  love.graphics.print('Hello Pong!', horizontal_center, vertical_center)
 end
