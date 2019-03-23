@@ -3,7 +3,7 @@
 BALL_HEIGHT = 25
 BALL_WIDTH = 25
 PADDLE_HEIGHT = 125
-PADDLE_SPEED = 100
+PADDLE_SPEED = 360
 PADDLE_WIDTH = 25
 WINDOX_CENTER_X = 640
 WINDOW_CENTER_Y = 360
@@ -42,18 +42,40 @@ function love.load()
   -- Ball
   ballX = 100
   ballY = 100
+  ballVelocityX = 300
+  ballVelocityY = 300
 end
 
 -- UPDATE
 
-function love.update()
+function love.update(dt)
   -- Move the ball
-  ballX = ballX + 1
-  ballY = ballY + 1
+  ballX = ballX + ballVelocityX * dt
+  ballY = ballY + ballVelocityY * dt
+
+  -- Ball hits top
+  if ballY < 0 then
+    ballVelocityY = -ballVelocityY
+  end
+
+  -- Ball hits bottom
+  if ballY + BALL_HEIGHT > WINDOW_HEIGHT then
+    ballVelocityY = -ballVelocityY
+  end
+
+  -- Ball hits left
+  if ballX < 0 then
+    ballVelocityX = -ballVelocityX
+  end
+
+  -- Ball hits right
+  if ballX + BALL_WIDTH > WINDOW_WIDTH then
+    ballVelocityX = -ballVelocityX
+  end
 
   -- Control the Player paddle
-  if love.keyboard.isDown("up") then player1PaddleY = player1PaddleY - 1 end
-  if love.keyboard.isDown("down") then player1PaddleY = player1PaddleY + 1 end
+  if love.keyboard.isDown("up") then player1PaddleY = player1PaddleY + -PADDLE_SPEED * dt end
+  if love.keyboard.isDown("down") then player1PaddleY = player1PaddleY + PADDLE_SPEED * dt end
 
   -- Control the "AI" paddle
   player2PaddleY = ballY
